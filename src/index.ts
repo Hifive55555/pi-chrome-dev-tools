@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
+import type { ExtensionAPI, ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { closeBrowser } from "./browser.js";
 import { navigateTool } from "./tools/navigate.js";
 import { clickTool } from "./tools/click.js";
@@ -11,7 +11,7 @@ import { listTabsTool, switchTabTool, newTabTool, closeTabTool } from "./tools/t
 import { pageInfoTool, waitTool, waitForLoadTool, goBackTool, goForwardTool, reloadTool } from "./tools/page.js";
 import { closeBrowserTool } from "./tools/close.js";
 
-const ALL_TOOLS = [
+const ALL_TOOLS: ToolDefinition<any, any, any>[] = [
   navigateTool,
   clickTool,
   typeTool,
