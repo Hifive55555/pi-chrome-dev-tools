@@ -1,8 +1,10 @@
 import { chromium, type BrowserContext, type Page } from "playwright";
+import { stealth } from "@mr_ozio/playwright-stealth";
 import { join } from "node:path";
 import { homedir } from "node:os";
 
 const USER_DATA_DIR = join(homedir(), ".chrome-dev-tools", "profile");
+const stealthChromium = stealth(chromium);
 
 let context: BrowserContext | null = null;
 
@@ -16,7 +18,7 @@ export async function ensureBrowser(): Promise<BrowserContext> {
     }
   }
 
-  context = await chromium.launchPersistentContext(USER_DATA_DIR, {
+  context = await stealthChromium.launchPersistentContext(USER_DATA_DIR, {
     channel: "chrome",
     headless: false,
     viewport: null,
