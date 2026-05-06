@@ -1,3 +1,8 @@
+---
+name: chrome-dev-tools
+description: "Browser control via Playwright. Lazily launches Chrome with a persistent profile. Use for navigating pages, clicking elements, typing, taking screenshots, reading accessibility trees, and managing tabs."
+---
+
 # Chrome Dev Tools
 
 Browser control via Playwright. Chrome launches lazily on first tool call with a persistent profile (~/.chrome-dev-tools/profile), so logins persist across sessions.
