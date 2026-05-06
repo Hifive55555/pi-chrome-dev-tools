@@ -1,0 +1,38 @@
+{
+  "name": "chrome-dev-tools",
+  "version": "0.1.0",
+  "description": "Pi extension — lazy-launch Chrome with Playwright, persistent profile, simple browser tools",
+  "keywords": ["pi-package", "pi-extension", "browser", "chrome", "playwright"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "src/",
+    "skills/",
+    "tsconfig.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "pi": {
+    "extensions": ["./src/index.ts"],
+    "skills": ["./skills"]
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@mariozechner/pi-coding-agent": "*",
+    "@mariozechner/pi-tui": "*",
+    "typebox": "*",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}
