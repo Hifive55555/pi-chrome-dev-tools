@@ -1,7 +1,7 @@
 import { Type } from "typebox";
 import type { ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { getActivePage } from "../browser.js";
-import { textResult } from "../tool-result.js";
+import { textResult, errorResult, wrapError } from "../tool-result.js";
 
 const TypeParams = Type.Object({
   text: Type.String({ description: "Text to type into the focused element" }),
@@ -14,9 +14,13 @@ export const typeTool: ToolDefinition<typeof TypeParams> = {
   promptSnippet: "Type text into the focused element",
   parameters: TypeParams,
   async execute(_id, args) {
-    const page = await getActivePage();
-    await page.keyboard.type(args.text);
-    return textResult(`Typed ${args.text.length} characters`);
+    try {
+      const page = await getActivePage();
+      await page.keyboard.type(args.text);
+      return textResult(`Typed ${args.text.length} characters`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };
 
@@ -31,8 +35,12 @@ export const pressKeyTool: ToolDefinition<typeof PressKeyParams> = {
   promptSnippet: "Press a keyboard key",
   parameters: PressKeyParams,
   async execute(_id, args) {
-    const page = await getActivePage();
-    await page.keyboard.press(args.key);
-    return textResult(`Pressed key: ${args.key}`);
+    try {
+      const page = await getActivePage();
+      await page.keyboard.press(args.key);
+      return textResult(`Pressed key: ${args.key}`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };

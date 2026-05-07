@@ -1,7 +1,7 @@
 import { Type } from "typebox";
 import type { ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { getActivePage } from "../browser.js";
-import { textResult } from "../tool-result.js";
+import { textResult, errorResult, wrapError } from "../tool-result.js";
 
 const EmptyParams = Type.Object({});
 
@@ -76,11 +76,15 @@ export const goBackTool: ToolDefinition<typeof EmptyParams> = {
   promptSnippet: "Go back in browser history",
   parameters: EmptyParams,
   async execute() {
-    const page = await getActivePage();
-    const response = await page.goBack({ waitUntil: "domcontentloaded" });
-    if (!response) return textResult("No previous page in history.");
-    const title = await page.title();
-    return textResult(`Back to: ${page.url()} — ${title}`);
+    try {
+      const page = await getActivePage();
+      const response = await page.goBack({ waitUntil: "domcontentloaded" });
+      if (!response) return textResult("No previous page in history.");
+      const title = await page.title();
+      return textResult(`Back to: ${page.url()} — ${title}`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };
 
@@ -91,11 +95,15 @@ export const goForwardTool: ToolDefinition<typeof EmptyParams> = {
   promptSnippet: "Go forward in browser history",
   parameters: EmptyParams,
   async execute() {
-    const page = await getActivePage();
-    const response = await page.goForward({ waitUntil: "domcontentloaded" });
-    if (!response) return textResult("No forward page in history.");
-    const title = await page.title();
-    return textResult(`Forward to: ${page.url()} — ${title}`);
+    try {
+      const page = await getActivePage();
+      const response = await page.goForward({ waitUntil: "domcontentloaded" });
+      if (!response) return textResult("No forward page in history.");
+      const title = await page.title();
+      return textResult(`Forward to: ${page.url()} — ${title}`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };
 
@@ -106,9 +114,13 @@ export const reloadTool: ToolDefinition<typeof EmptyParams> = {
   promptSnippet: "Reload the current page",
   parameters: EmptyParams,
   async execute() {
-    const page = await getActivePage();
-    await page.reload({ waitUntil: "domcontentloaded" });
-    const title = await page.title();
-    return textResult(`Reloaded: ${page.url()} — ${title}`);
+    try {
+      const page = await getActivePage();
+      await page.reload({ waitUntil: "domcontentloaded" });
+      const title = await page.title();
+      return textResult(`Reloaded: ${page.url()} — ${title}`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };
