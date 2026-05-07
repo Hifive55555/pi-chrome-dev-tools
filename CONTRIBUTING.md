@@ -5,8 +5,8 @@ Thanks for your interest in improving `chrome-dev-tools`.
 ## Setup
 
 ```bash
-git clone https://github.com/lallenlowe/chrome-dev-tools.git
-cd chrome-dev-tools
+git clone https://github.com/lallenlowe/pi-chrome-dev-tools.git
+cd pi-chrome-dev-tools
 npm install
 npm run typecheck
 ```

@@ -1,4 +1,4 @@
-# chrome-dev-tools
+# pi-chrome-dev-tools
 
 Lazy-launch browser control for [pi](https://github.com/mariozechner/pi) agents. Uses your **system Chrome** with a persistent profile — logins, cookies, and extensions carry across sessions. Stealth-patched to avoid bot detection out of the box.
 
@@ -21,7 +21,7 @@ Lazy-launch browser control for [pi](https://github.com/mariozechner/pi) agents.
 ## Quick Start
 
 ```bash
-pi install npm:chrome-dev-tools
+pi install npm:pi-chrome-dev-tools
 ```
 
 That's it. No Chrome flags, no remote debugging setup. The first `chrome_navigate` call launches Chrome automatically.

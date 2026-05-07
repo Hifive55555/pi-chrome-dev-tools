@@ -1,18 +1,19 @@
 {
-  "name": "chrome-dev-tools",
+  "name": "pi-chrome-dev-tools",
   "version": "0.1.0",
   "description": "Pi extension — lazy-launch Chrome with Playwright, persistent profile, stealth patches, simple browser tools",
+  "main": "src/index.ts",
   "keywords": ["pi-package", "pi-extension", "browser", "chrome", "playwright", "stealth", "web-automation"],
   "author": "Allen Lowe",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lallenlowe/chrome-dev-tools.git"
+    "url": "git+https://github.com/lallenlowe/pi-chrome-dev-tools.git"
   },
   "bugs": {
-    "url": "https://github.com/lallenlowe/chrome-dev-tools/issues"
+    "url": "https://github.com/lallenlowe/pi-chrome-dev-tools/issues"
   },
-  "homepage": "https://github.com/lallenlowe/chrome-dev-tools#readme",
+  "homepage": "https://github.com/lallenlowe/pi-chrome-dev-tools#readme",
   "engines": {
     "node": ">=22.0.0"
   },
