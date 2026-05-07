@@ -1,15 +1,18 @@
 {
   "name": "chrome-dev-tools",
   "version": "0.1.0",
-  "description": "Pi extension — lazy-launch Chrome with Playwright, persistent profile, simple browser tools",
-  "keywords": [
-    "pi-package",
-    "pi-extension",
-    "browser",
-    "chrome",
-    "playwright"
-  ],
+  "description": "Pi extension — lazy-launch Chrome with Playwright, persistent profile, stealth patches, simple browser tools",
+  "keywords": ["pi-package", "pi-extension", "browser", "chrome", "playwright", "stealth", "web-automation"],
+  "author": "Allen Lowe",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lallenlowe/chrome-dev-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lallenlowe/chrome-dev-tools/issues"
+  },
+  "homepage": "https://github.com/lallenlowe/chrome-dev-tools#readme",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -18,15 +21,12 @@
     "skills/",
     "tsconfig.json",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "pi": {
-    "extensions": [
-      "./src/index.ts"
-    ],
-    "skills": [
-      "./skills"
-    ]
+    "extensions": ["./src/index.ts"],
+    "skills": ["./skills"]
   },
   "peerDependencies": {
     "@mariozechner/pi-coding-agent": "*",
@@ -44,6 +44,10 @@
     "playwright": "^1.52.0"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

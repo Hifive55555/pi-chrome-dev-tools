@@ -1,0 +1,6 @@
+.github/
+.git/
+.pi/
+node_modules/
+docs/
+*.tgz
