@@ -7,10 +7,10 @@ export function textResult(text: string, details?: Record<string, unknown>): Age
   };
 }
 
-export function errorResult(message: string): AgentToolResult<Record<string, unknown>> {
+export function errorResult<T = Record<string, unknown>>(message: string): AgentToolResult<T> {
   return {
     content: [{ type: "text", text: message }],
-    details: { error: true },
+    details: { error: true } as T,
   };
 }
 

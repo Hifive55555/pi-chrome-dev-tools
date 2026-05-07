@@ -207,7 +207,7 @@ export const snapshotTool: ToolDefinition<typeof SnapshotParams, SnapshotDetails
     try {
       page = await getActivePage();
     } catch (err) {
-      return errorResult(wrapError(err)) as any;
+      return errorResult<SnapshotDetails>(wrapError(err));
     }
     const cdp = await page.context().newCDPSession(page);
 
