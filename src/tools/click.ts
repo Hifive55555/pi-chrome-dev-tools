@@ -1,7 +1,7 @@
 import { Type } from "typebox";
 import type { ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { getActivePage } from "../browser.js";
-import { textResult } from "../tool-result.js";
+import { textResult, errorResult, wrapError } from "../tool-result.js";
 
 const ClickParams = Type.Object({
   x: Type.Number({ description: "X coordinate in CSS pixels" }),
@@ -17,11 +17,15 @@ export const clickTool: ToolDefinition<typeof ClickParams> = {
   promptSnippet: "Click at (x, y) in the browser",
   parameters: ClickParams,
   async execute(_id, args) {
-    const page = await getActivePage();
-    await page.mouse.click(args.x, args.y, {
-      button: args.button ?? "left",
-      clickCount: args.clickCount ?? 1,
-    });
-    return textResult(`Clicked at (${args.x}, ${args.y})`);
+    try {
+      const page = await getActivePage();
+      await page.mouse.click(args.x, args.y, {
+        button: args.button ?? "left",
+        clickCount: args.clickCount ?? 1,
+      });
+      return textResult(`Clicked at (${args.x}, ${args.y})`);
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };

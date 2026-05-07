@@ -77,7 +77,8 @@ export const goBackTool: ToolDefinition<typeof EmptyParams> = {
   parameters: EmptyParams,
   async execute() {
     const page = await getActivePage();
-    await page.goBack({ waitUntil: "domcontentloaded" });
+    const response = await page.goBack({ waitUntil: "domcontentloaded" });
+    if (!response) return textResult("No previous page in history.");
     const title = await page.title();
     return textResult(`Back to: ${page.url()} — ${title}`);
   },
@@ -91,7 +92,8 @@ export const goForwardTool: ToolDefinition<typeof EmptyParams> = {
   parameters: EmptyParams,
   async execute() {
     const page = await getActivePage();
-    await page.goForward({ waitUntil: "domcontentloaded" });
+    const response = await page.goForward({ waitUntil: "domcontentloaded" });
+    if (!response) return textResult("No forward page in history.");
     const title = await page.title();
     return textResult(`Forward to: ${page.url()} — ${title}`);
   },

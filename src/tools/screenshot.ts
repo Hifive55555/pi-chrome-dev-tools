@@ -1,7 +1,7 @@
 import { Type } from "typebox";
 import type { ToolDefinition } from "@mariozechner/pi-coding-agent";
 import { getActivePage } from "../browser.js";
-import { textResult } from "../tool-result.js";
+import { textResult, errorResult, wrapError } from "../tool-result.js";
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -18,13 +18,17 @@ export const screenshotTool: ToolDefinition<typeof ScreenshotParams> = {
   promptSnippet: "Screenshot the browser (visual verification only)",
   parameters: ScreenshotParams,
   async execute(_id, args) {
-    const page = await getActivePage();
-    const savePath = args.path ?? join(tmpdir(), `chrome-screenshot-${Date.now()}.png`);
-    const buffer = await page.screenshot({
-      fullPage: args.fullPage ?? false,
-      type: "png",
-    });
-    writeFileSync(savePath, buffer);
-    return textResult(`Screenshot saved to: ${savePath}`, { path: savePath });
+    try {
+      const page = await getActivePage();
+      const savePath = args.path ?? join(tmpdir(), `chrome-screenshot-${Date.now()}.png`);
+      const buffer = await page.screenshot({
+        fullPage: args.fullPage ?? false,
+        type: "png",
+      });
+      writeFileSync(savePath, buffer);
+      return textResult(`Screenshot saved to: ${savePath}`, { path: savePath });
+    } catch (err) {
+      return errorResult(wrapError(err));
+    }
   },
 };

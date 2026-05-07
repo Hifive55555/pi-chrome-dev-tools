@@ -45,6 +45,4 @@ export async function closeBrowser(): Promise<void> {
   }
 }
 
-export function getContext(): BrowserContext | null {
-  return context;
-}
+

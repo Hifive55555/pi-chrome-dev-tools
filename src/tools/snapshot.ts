@@ -4,6 +4,7 @@ import { getMarkdownTheme, keyHint } from "@mariozechner/pi-coding-agent";
 import { Markdown } from "@mariozechner/pi-tui";
 import type { Theme } from "@mariozechner/pi-coding-agent";
 import { getActivePage } from "../browser.js";
+import { errorResult, wrapError } from "../tool-result.js";
 
 const SnapshotParams = Type.Object({
   interestingOnly: Type.Optional(
@@ -202,7 +203,12 @@ export const snapshotTool: ToolDefinition<typeof SnapshotParams, SnapshotDetails
   ],
   parameters: SnapshotParams,
   async execute(_id, args) {
-    const page = await getActivePage();
+    let page;
+    try {
+      page = await getActivePage();
+    } catch (err) {
+      return errorResult(wrapError(err)) as any;
+    }
     const cdp = await page.context().newCDPSession(page);
 
     try {
