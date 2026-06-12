@@ -22,6 +22,11 @@ export async function ensureBrowser(): Promise<BrowserContext> {
     channel: "chrome",
     headless: false,
     viewport: null,
+    // --use-mock-keychain makes cookies unreadable across automated and manual
+    // launches of this profile (different encryption keys), which breaks the
+    // "sign in to Google manually, reuse the session under automation" flow.
+    // --enable-automation is a bot-detection signal.
+    ignoreDefaultArgs: ["--use-mock-keychain", "--enable-automation"],
     args: ["--disable-blink-features=AutomationControlled"],
   });
 
